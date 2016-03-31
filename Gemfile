@@ -7,9 +7,10 @@ gem 'rails', '4.2.5'
 gem 'devise'
 gem 'protected_attributes'
 gem 'simple_form'
-gem "twitter-bootstrap-rails"
-gem "therubyracer"
-gem "less-rails"
+gem 'twitter-bootstrap-rails'
+gem 'therubyracer'
+gem 'less-rails'
+gem 'bootstrap-sass'
 gem 'sqlite3'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'

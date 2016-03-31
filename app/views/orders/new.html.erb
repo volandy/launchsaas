@@ -1,6 +1,18 @@
- <%= simple_form_for @order do |f| %>
-    <%= f.input :first_course_name %>
-    <%= f.input :main_course_name %>
-    <%= f.input :drink_name %>
-    <%= f.button :submit %>
+<%= simple_form_for(@order) do |f| %>
+
+ 
+    <div class="field">
+     <%= f.label :first_course_id %>
+     <%= f.collection_select :first_course_id, FirstCourse.all, :id, :name, iclude_blank:true %>
+    </div>
+    <div class="field">
+     <%= f.label :second_course_id %>
+     <%= f.collection_select :second_course_id, SecondCourse.all, :id, :name, iclude_blank:true %>
+    </div>
+    <div class="field">
+     <%= f.label :drink_id %>
+     <%= f.collection_select :drink_id, Drink.all, :id, :name, iclude_blank:true %>
+    </div>
+    
+    <%= f.button :submit, class: "btn btn-default btn-lg" %>
 <% end %>

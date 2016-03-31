@@ -1,23 +1,40 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Workspace</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-   <%# user is logged in, show log out link %>
-  <% if current_user.present? %>
-    <%= link_to 'Sign Out', destroy_user_session_path, :method => :delete %>
-  <%# user is not logged in, show signup and login links %>
-  <% else %>
-    <%= link_to 'Sign In', new_user_session_path %> |
-    <%= link_to 'Register Now!', new_user_registration_path %>
-  <% end %>
+  <head>
+    <title>LaunchSaaSapp</title>
+    <%= stylesheet_link_tag 'application', media: 'all',
+                                           'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+    <!--[if lt IE 9]>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/r29/html5.min.js">
+      </script>
+    <![endif]-->
+  </head>
+  <body>
+    <header class="navbar navbar-fixed-top navbar-inverse">
+      <div class="container">
+        <%= link_to "launch saas", '/', id: "logo" %>
+        <nav>
+          <ul class="nav navbar-nav navbar-right">
+            <li><%= link_to "Home",   '/' %></li>
+            <li><%= link_to "Help",   '#' %></li>
+            <li><%# user is logged in, show log out link %>
+                <% if current_user.present? %>
+                <%= link_to 'Sign Out', destroy_user_session_path, :method => :delete %>
+                <%# user is not logged in, show signup and login links %>
+                <% else %>
+                <%= link_to 'Sign In', new_user_session_path %> | 
+                <%= link_to 'Register Now!', new_user_registration_path %>
+                <% end %></li></ul>
+        </nav>
+      </div>
+    </header>
+    <div class="container">
   <p class="notice"><%= notice %></p>
   <p class="alert"><%= alert %></p>
-<%= yield %>
 
-</body>
+      <%= yield %>
+    </div>
+  </body>
 </html>

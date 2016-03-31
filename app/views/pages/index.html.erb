@@ -1,2 +1,7 @@
 <h1>Homepage</h1>
-<%= link_to "Add an order", new_order_path %>
+<%= link_to "Add an order", new_order_path, class: "btn btn-lg btn-primary" %>
+<% if current_user.admin? && !current_user?(user) %>
+<%= link_to "Add a first course", new_first_course_path, class: "btn btn-lg btn-primary" %>
+<%= link_to "Add a second course", new_second_course_path, class: "btn btn-lg btn-primary" %>
+<%= link_to "Add a drink", new_drink_path, class: "btn btn-lg btn-primary" %>
+  <% end %>

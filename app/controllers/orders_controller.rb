@@ -1,4 +1,5 @@
 class OrdersController < ApplicationController
+  before_filter :authenticate_user!
   def show
     @order = Order.find(params[:id])
   end
@@ -8,15 +9,17 @@ class OrdersController < ApplicationController
   end
 
   def create
-  @order = Order.new(params[:user])
+  @order = current_user.orders.create(params[:order])
     if @order.save
-      # Handle a successful save.
+      redirect_to root_url
     else
-      @title = "Sign up"
-      render = 'new'
+      
+    render :new
     end
   end
   
   def destroy
   end
+  
+
 end
