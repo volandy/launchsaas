@@ -10,6 +10,11 @@
       <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/r29/html5.min.js">
       </script>
     <![endif]-->
+    
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
   </head>
   <body>
     <header class="navbar navbar-fixed-top navbar-inverse">
@@ -17,15 +22,24 @@
         <%= link_to "launch saas", '/', id: "logo" %>
         <nav>
           <ul class="nav navbar-nav navbar-right">
-            <li><%= link_to "Home",   '/' %></li>
-            <li><%= link_to "Help",   '#' %></li>
-            <li><%# user is logged in, show log out link %>
+            <% if current_user && current_user.admin? %>
+            <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin actions<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><%= link_to "Add a first course for today", new_first_course_path %></li>
+            <li><%= link_to "Add a main course for today", new_second_course_path %></li>
+            <li><%= link_to "Add a drink for today", new_drink_path %></li>
+          </ul>
+        </li>
+            <% end %>
+
+            <%# user is logged in, show log out link %>
                 <% if current_user.present? %>
-                <%= link_to 'Sign Out', destroy_user_session_path, :method => :delete %>
+                <li><%= link_to 'Sign Out', destroy_user_session_path, :method => :delete %></li>
                 <%# user is not logged in, show signup and login links %>
                 <% else %>
-                <%= link_to 'Sign In', new_user_session_path %> | 
-                <%= link_to 'Register Now!', new_user_registration_path %>
+                <li><%= link_to 'Sign In', new_user_session_path %></li> | 
+                <li><%= link_to 'Register Now!', new_user_registration_path %></li>
                 <% end %></li></ul>
         </nav>
       </div>
@@ -37,4 +51,6 @@
       <%= yield %>
     </div>
   </body>
+  
+
 </html>

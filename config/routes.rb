@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :first_courses
   resources :second_courses
   resources :drinks
+  resources :users
   root :to => "pages#index"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
