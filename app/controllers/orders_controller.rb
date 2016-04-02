@@ -4,6 +4,7 @@ class OrdersController < ApplicationController
   
   def index
     @orders = Order.created(Date.today)
+    @orders_by_date = @orders.group_by(&:created_at)
   end
 
   def new

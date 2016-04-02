@@ -1,4 +1,10 @@
-<h3>Today's orders:</h3>
+<h3>Browse orders:</h3>
+<div id="orders">
+  <%= calendar do |date| %>
+   <%= date.day %>
+<% end %>
+</div>
+
 <ol class="orders">
   <% @orders.each do |order| %>
     <li><%= User.find_by_id(order.user_id).name %> |
