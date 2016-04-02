@@ -1,4 +1,7 @@
 class SecondCoursesController < ApplicationController
+  before_filter do 
+    redirect_to :root unless current_user && current_user.admin?
+  end
     def new
         @second_course = SecondCourse.new
     end

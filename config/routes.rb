@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :pages
-  resources :orders
-  resources :first_courses
-  resources :second_courses
-  resources :drinks
+  resources :pages, :only => [:index]
+  resources :orders, :only => [:create, :new, :show, :index]
+  resources :first_courses, :only => [:create, :new]
+  resources :second_courses, :only => [:create, :new]
+  resources :drinks, :only => [:create, :new]
   resources :users
   root :to => "pages#index"
   # The priority is based upon order of creation: first created -> highest priority.

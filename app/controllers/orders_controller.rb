@@ -1,7 +1,9 @@
 class OrdersController < ApplicationController
   before_filter :authenticate_user!
-  def show
-    @orders = Order.all
+  before_filter :ensure_admin, only:  [:index]
+  
+  def index
+    @orders = Order.created(Date.today)
   end
 
   def new
@@ -26,5 +28,11 @@ class OrdersController < ApplicationController
     params.require(:order).permit(:first_course_id, :second_course_id, :drink_id)
   end
   
+  def ensure_admin
+    unless current_user.admin?
+      redirect_to root_path
+      return false
+    end
+  end
 
 end
