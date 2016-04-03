@@ -3,8 +3,10 @@ class OrdersController < ApplicationController
   before_filter :ensure_admin, only:  [:index]
   
   def index
-    @orders = Order.created(Date.today)
-    @orders_by_date = @orders.group_by(&:created_at)
+    @orders = Order.all
+    @orders_by_date = @orders.group_by { |order| order.created_at }
+    @date = params[:date] ? Date.parse(params[:date]) : Date.today
+    @currentdaysorders = []
   end
 
   def new
