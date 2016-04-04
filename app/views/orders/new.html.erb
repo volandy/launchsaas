@@ -1,18 +1,21 @@
+<h2>New order for today:</h2>
+
 <%= form_for(@order) do |f| %>
 
- <%= render 'shared/error_messages', object: f.object %>
-    <div class="field">
+ <h3><%= render 'shared/error_messages', object: f.object %>
+    <p><div class="field">
      <%= f.label :first_course_id %>
      <%= f.collection_select :first_course_id, FirstCourse.all.where("created_at >= ?", Time.zone.now.beginning_of_day), :id, :name, include_blank:true %>
-    </div>
-    <div class="field">
+    </div></p>
+    <p><div class="field">
      <%= f.label :second_course_id %>
      <%= f.collection_select :second_course_id, SecondCourse.all.where("created_at >= ?", Time.zone.now.beginning_of_day), :id, :name, include_blank:true %>
-    </div>
-    <div class="field">
+    </div></p>
+    <p><div class="field">
      <%= f.label :drink_id %>
      <%= f.collection_select :drink_id, Drink.all.where("created_at >= ?", Time.zone.now.beginning_of_day), :id, :name, include_blank:true %>
-    </div>
+    </div></p>
     
     <%= f.button :submit, class: "btn btn-default btn-lg" %>
+</h3>
 <% end %>
