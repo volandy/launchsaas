@@ -36,7 +36,7 @@ h1 {
   text-align: center;
 }
 
-h2 {
+h2, h3 {
   font-size: 1.2em;
   letter-spacing: -1px;
   margin-bottom: 30px;
@@ -48,6 +48,8 @@ h2 {
 p {
   font-size: 1.1em;
   line-height: 1.7em;
+  margin-right: 15px;
+  text-align: right;
 }
 
 /* header */
@@ -131,3 +133,4 @@ p {
   font-size: 11px;
   padding-left: 20px;
 }
+

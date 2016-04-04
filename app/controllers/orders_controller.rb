@@ -7,6 +7,10 @@ class OrdersController < ApplicationController
     @orders_by_date = @orders.group_by { |order| order.created_at }
     @date = params[:date] ? Date.parse(params[:date]) : Date.today
     @currentdaysorders = []
+    @todaystotal = 0
+    @totalforfirst = 0
+    @totalformain = 0
+    @totalfordrinks = 0
   end
 
   def new

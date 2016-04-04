@@ -1,44 +1,69 @@
 <h1>Browse orders:</h1>
-<h2 id="month">
-    <%= link_to "<", date: @date.prev_day %>
-    <%= @date.strftime("%m-%d-%Y") %>
-    <%= link_to ">", date: @date.next_day %>
-</h2>
-<h3>Orders for <%= @date.strftime("%b %d %Y") %>:</h3>
-<ol class="orders">
-
-  <% @orders.each do |order| %>
-    <li><%= User.find_by_id(order.user_id).name %> |
-    <%= FirstCourse.find_by_id(order.first_course_id).name %> <%= FirstCourse.find_by_id(order.first_course_id).price %> |
-    <%= SecondCourse.find_by_id(order.second_course_id).name %> <%= SecondCourse.find_by_id(order.second_course_id).price %> |
-    <%= Drink.find_by_id(order.drink_id).name %> <%= Drink.find_by_id(order.drink_id).price %></li>
-  <% end %>
-</ol>
-
 
 <div id="orders">
   <%= calendar @date do |date| %>
    <%= date.day %>
    <% if @orders_by_date[date] %>
-   <h2><%=  @orders_by_date.count %></h2>
+   <div id="orders">
+       <p><%= link_to "#{@orders_by_date[date].count}", date: date %></p>
+    </div>
+   
     <% end %>
   <% end %>
 </div>
 
-<% if @orders_by_date[@date] %>
+<h2 id="month">
+    <%= link_to "<", date: @date.prev_day %>
+    Orders for <%= @date.strftime("%b %d %Y") %> :
+    <%= link_to ">", date: @date.next_day %>
+</h2>
 
-      <% @orders_by_date[@date].each do |order| %>
-      <%= @currentdaysorders << order %>
-      <% end %>
-        <% else %>
-          <%= @currentdaysorders = [] %>
-       <% end %>
-
- <ol class="orders">
-  <% @currentdaysorders.each do |order| %>
-    <li><%= User.find_by_id(order.user_id).name %> |
-    <%= FirstCourse.find_by_id(order.first_course_id).name %> <%= FirstCourse.find_by_id(order.first_course_id).price %> |
-    <%= SecondCourse.find_by_id(order.second_course_id).name %> <%= SecondCourse.find_by_id(order.second_course_id).price %> |
-    <%= Drink.find_by_id(order.drink_id).name %> <%= Drink.find_by_id(order.drink_id).price %></li>
+  <% if @orders_by_date[@date] %>
+    <% @orders_by_date[@date].each do |order| %>
+      <% @currentdaysorders << order %>
+    <% end %>
+  <% else %>
+    <% @currentdaysorders = [] %>
   <% end %>
- <ol>
+<div id="orders">
+    <table>
+    <tr>
+        <td>User's name</td>
+        <td>First course name</td>
+        <td>First course Price</td>
+        <td>Main course name</td>
+        <td>Main course Price</td>
+        <td>Drink name</td>
+        <td>Drink Price</td>
+        <td>Order's total</td>
+    </tr>
+
+  <% @currentdaysorders.each do |order| %>
+  <tr>
+    <td><%= User.find_by_id(order.user_id).name %></td>
+    <td><%= FirstCourse.find_by_id(order.first_course_id).name %></td>
+    <td><%= FirstCourse.find_by_id(order.first_course_id).price %></td>
+    <td><%= SecondCourse.find_by_id(order.second_course_id).name %></td>
+    <td><%= SecondCourse.find_by_id(order.second_course_id).price %></td>
+    <td><%= Drink.find_by_id(order.drink_id).name %></td>
+    <td><%= Drink.find_by_id(order.drink_id).price %></li></td>
+    <td><%= FirstCourse.find_by_id(order.first_course_id).price + SecondCourse.find_by_id(order.second_course_id).price + Drink.find_by_id(order.drink_id).price %></td>
+    <% @todaystotal = @todaystotal + FirstCourse.find_by_id(order.first_course_id).price + SecondCourse.find_by_id(order.second_course_id).price + Drink.find_by_id(order.drink_id).price %>
+    <% @totalforfirst += FirstCourse.find_by_id(order.first_course_id).price %>
+    <% @totalformain += SecondCourse.find_by_id(order.second_course_id).price %>
+    <% @totalfordrinks += Drink.find_by_id(order.drink_id).price %>
+
+  </tr>
+  <% end %>
+  <tr>
+    <td>Totals</td>
+    <td>-</td>
+    <td><%= @totalforfirst %></td>
+    <td>-</td>
+    <td><%= @totalformain %></td>
+    <td>-</td>
+    <td><%= @totalfordrinks %></td>
+    <td><%= @todaystotal %></td>
+  </tr>
+ </table>
+<p></p> 

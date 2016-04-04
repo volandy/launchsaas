@@ -1,25 +1,27 @@
-<%= link_to "Add an order", new_order_path, class: "btn btn-lg btn-primary" %>
+
 <h1>In today's menu:</h1>
 <h3>First course items:</h3>
-<ul class="menu">
+
+<ol class="menu">
   <% FirstCourse.all.where("created_at >= ?", Time.zone.now.beginning_of_day).each do |first_course| %>
     <li><%= first_course.name %> | <%= first_course.price %></li> 
   <% end %>
-</ul>
+</ol>
 
 <h3>Main course items:</h3>
-<ul class="menu">
+<ol class="menu">
   <% SecondCourse.all.where("created_at >= ?", Time.zone.now.beginning_of_day).each do |main_course| %>
     <li><%= main_course.name %> | <%= main_course.price %></li>
   <% end %>
-</ul>
+</ol>
 
 <h3>Drinks:</h3>
-<ul class="menu">
+<ol class="menu">
   <% Drink.all.where("created_at >= ?", Time.zone.now.beginning_of_day).each do |drink| %>
     <li><%= drink.name %> | <%= drink.price %></li>
   <% end %>
-</ul>
+</ol>
+<%= link_to "Place an order", new_order_path, class: "btn btn-lg btn-primary" %>
 
 
 
