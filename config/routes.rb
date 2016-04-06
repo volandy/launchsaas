@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: { sessions: "users/sessions", :registrations => "users/registrations"  }
   resources :menus, :only => [:index]
   resources :orders, :only => [:create, :new, :show, :index]
   resources :first_courses, :only => [:create, :new]

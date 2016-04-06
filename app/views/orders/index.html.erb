@@ -1,17 +1,5 @@
 <h1>Browse orders:</h1>
 
-<div id="orders">
-  <%= calendar @date do |date| %>
-   <%= date.day %>
-   <% if @orders_by_date[date] %>
-   <div id="orders">
-       <p><%= link_to "#{pluralize(@orders_by_date[date].count, "order")}", date: date %></p>
-    </div>
-   
-    <% end %>
-  <% end %>
-</div>
-
 <h2 id="month">
     <%= link_to "<", date: @date.prev_day %>
     Orders for <%= @date.strftime("%b %d %Y") %> :
@@ -25,6 +13,7 @@
   <% else %>
     <% @currentdaysorders = [] %>
   <% end %>
+
 <div id="orders">
     <table>
     <tr>
@@ -66,4 +55,22 @@
     <td><%= @todaystotal %></td>
   </tr>
  </table>
-<p></p> 
+ </div>
+ 
+ <h1></h1> 
+
+<div id="orders">
+  <%= calendar @date do |date| %>
+   <%= date.day %>
+   <% if @orders_by_date[date] %>
+   <div id="orders">
+       <p><%= link_to "#{pluralize(@orders_by_date[date].count, "order")}", date: date %></p>
+    </div>
+   
+    <% end %>
+  <% end %>
+</div>
+
+
+
+
