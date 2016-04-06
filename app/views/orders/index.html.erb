@@ -5,7 +5,7 @@
    <%= date.day %>
    <% if @orders_by_date[date] %>
    <div id="orders">
-       <p><%= link_to "#{@orders_by_date[date].count}", date: date %></p>
+       <p><%= link_to "#{pluralize(@orders_by_date[date].count, "order")}", date: date %></p>
     </div>
    
     <% end %>

@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  attr_accessible :id, :email, :name, :encrypted_password, :password_confirmation 
+  attr_accessible :id, :email, :name, :password, :password_confirmation 
   after_create :set_admin
   has_many :orders, dependent: :destroy
   devise :database_authenticatable, :registerable,

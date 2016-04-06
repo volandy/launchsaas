@@ -1,0 +1,54 @@
+
+<h2 id="month">
+    <%= link_to "<", date: @date.prev_day %>
+    Menu for <%= @date.strftime("%b %d %Y") %> :
+    <%= link_to ">", date: @date.next_day %>
+</h2>
+
+<h3>First course items:</h3>
+<% if @first_course_by_date[@date] %>
+    <% @first_course_by_date[@date].each do |first_course| %>
+      <% @currentdaysfirstcourses << first_course %>
+    <% end %>
+  <% else %>
+    <% @currentdaysfirstcourses = [] %>
+  <% end %>
+  <% @currentdaysfirstcourses.each do |first_course| %>
+<div class="menu">
+    <p><%= first_course.name %> | <%= first_course.price %></p>
+
+</div>
+<% end %>
+
+<h3>Main course items:</h3>
+<% if @second_course_by_date[@date] %>
+    <% @second_course_by_date[@date].each do |second_course| %>
+      <% @currentdayssecondcourses << second_course %>
+    <% end %>
+  <% else %>
+    <% @currentdayssecondcourses = [] %>
+  <% end %>
+  <% @currentdayssecondcourses.each do |main_course| %>
+<div class="menu">
+    <p><%= main_course.name %> | <%= main_course.price %></p>
+  <% end %>
+</div>
+
+<h3>Drinks:</h3>
+<% if @drinks_by_date[@date] %>
+    <% @drinks_by_date[@date].each do |drink| %>
+      <% @currentdaysdrinks << drink %>
+    <% end %>
+  <% else %>
+    <% @currentdaysdrinks = [] %>
+  <% end %>
+  <% @currentdaysdrinks.each do |drink| %>
+<div class="menu">
+    <p><%= drink.name %> | <%= drink.price %></p>
+  <% end %>
+</div>
+<p><%= link_to "Place order for today", new_order_path, class: "btn btn-lg btn-primary" %></p>
+
+
+
+
