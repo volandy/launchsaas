@@ -5,7 +5,11 @@ class Api::V1::OrdersController < ApplicationController
       
 
   def index
-    respond_with Order.all.where(:created_at => Time.now.strftime("%Y-%m-%d"))
+    @orders = Order.all.where(:created_at => Time.now.strftime("%Y-%m-%d"))
+    @drinks = Drink.all
+    @first_courses = FirstCourse.all
+    @second_courses = SecondCourse.all
+    @users = User.all
   end
   
     private
