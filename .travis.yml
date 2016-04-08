@@ -1,8 +1,10 @@
 language: ruby
 rvm:
  - 2.3.0-p0
-services:
-  - sqlite3
+env:
+  - DB=sqlite
+script: 
+  - bundle exec rake db:migrate
  
 # uncomment this line if your project needs to run something other than `rake`:
 # script: bundle exec rspec spec
