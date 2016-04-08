@@ -4,7 +4,7 @@ rvm:
 env:
   - DB=sqlite
 script: 
-  - bundle exec rake db:migrate
+  - bundle exec rake db:schema:load
  
 # uncomment this line if your project needs to run something other than `rake`:
 # script: bundle exec rspec spec
